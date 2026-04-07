@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PM AI Scanner — Setup Guide</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f4f9;
+      color: #111;
+      padding: 24px 16px 60px;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 22px;
+      color: #0057a8;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #0057a8;
+      margin: 28px 0 10px;
+    }
+    .step {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #dce6f0;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .step-num {
+      display: inline-block;
+      background: #0057a8;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      line-height: 24px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .step p, .step li { font-size: 14px; color: #333; margin-top: 6px; }
+    .step ul { padding-left: 20px; }
+    code {
+      background: #edf2f9;
+      border: 1px solid #c8d8ea;
+      border-radius: 5px;
+      padding: 2px 6px;
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 12.5px;
+      word-break: break-all;
+    }
+    .code-block {
+      background: #1a1a2e;
+      color: #a8d8ff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-top: 10px;
+    }
+    .tip {
+      background: #fff8e6;
+      border-left: 4px solid #f5a623;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      margin-top: 10px;
+    }
+    .tip strong { color: #b45309; }
+    .badge {
+      display: inline-block;
+      background: #e8f0ff;
+      color: #0057a8;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    .copy-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 9px 18px;
+      background: #0057a8;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .copy-btn:active { opacity: .8; }
+    hr { border: none; border-top: 1px solid #dce6f0; margin: 28px 0; }
+    .faq dt { font-weight: 600; font-size: 14px; margin-top: 14px; }
+    .faq dd { font-size: 13.5px; color: #444; margin-left: 0; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+  <h1>PM AI Scanner</h1>
+  <p class="subtitle">Claude-powered page scanner for <strong>unify.performancematters.com</strong> — Safari compatible</p>
+
+  <h2>What it does</h2>
+  <div class="step">
+    <p>When you're on a Performance Matters test or quiz page, tap the bookmark to open a sidebar. It automatically scans all questions and answer choices visible on the page and sends them to Claude, which identifies the correct answers with explanations.</p>
+    <ul style="margin-top:8px;">
+      <li>Works entirely in Safari — no Chrome extension needed</li>
+      <li>Your API key is stored only in your browser's local storage</li>
+      <li>Tap the bookmark again to close the sidebar</li>
+    </ul>
+  </div>
+
+  <h2>Setup (one time)</h2>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">1</span> Get an Anthropic API Key</div>
+    <p>Go to <code>console.anthropic.com/settings/api-keys</code> and create a key. It starts with <code>sk-ant-</code>. Copy it somewhere safe.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">2</span> Copy the bookmarklet code</div>
+    <p>Tap the button below to copy the full bookmarklet JavaScript:</p>
+    <button class="copy-btn" onclick="copyBookmarklet()">Copy Bookmarklet Code</button>
+    <div id="copy-status" style="font-size:13px;color:#2a7a2a;margin-top:6px;min-height:18px;"></div>
+    <div class="tip"><strong>On iPad/iPhone:</strong> You can also long-press the button above and tap "Copy Link" — that won't work here since it's a button, so use the copy button then paste manually.</div>
+  </div>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">3</span> Create the bookmark in Safari</div>
+    <ul>
+      <li>Open Safari and go to any page (e.g. <code>apple.com</code>)</li>
+      <li>Tap the <strong>Share</strong> button (box with arrow) → <strong>Add Bookmark</strong></li>
+      <li>Name it <strong>PM AI Scanner</strong> → Save</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">4</span> Replace the bookmark URL with the code</div>
+    <ul>
+      <li>Tap the <strong>book icon</strong> (Bookmarks) → <strong>Edit</strong></li>
+      <li>Find <strong>PM AI Scanner</strong> → tap it to edit</li>
+      <li>Tap the URL field, select all, delete it</li>
+      <li>Paste the bookmarklet code you copied in step 2</li>
+      <li>Tap <strong>Done</strong></li>
+    </ul>
+    <div class="tip"><strong>Tip:</strong> On Mac Safari, you can edit bookmarks via Bookmarks menu → Edit Bookmarks.</div>
+  </div>
+
+  <hr>
+
+  <h2>How to use</h2>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">1</span> Open a Performance Matters test</div>
+    <p>Navigate to <code>unify.performancematters.com</code> and open any test, quiz, or assessment page.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">2</span> Tap the bookmark</div>
+    <p>Open your bookmarks and tap <strong>PM AI Scanner</strong>. A sidebar appears on the right side of the page.</p>
+    <p style="margin-top:6px;">The tool automatically scans the page and fills the content box. A green status message confirms what was captured.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">3</span> Enter your API key (first time only)</div>
+    <p>Tap <strong>Ask Claude</strong>. A prompt will ask for your Anthropic API key. Paste it — it's saved locally so you won't be asked again on this site.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-title"><span class="step-num">4</span> Get answers</div>
+    <p>Claude reads the scanned content and returns answers for each question with brief explanations. Use the <strong>Copy Answer</strong> button to copy the response.</p>
+    <p style="margin-top:6px;">If some content was missed, tap <strong>Re-scan Page</strong> or paste content manually into the text box, then tap <strong>Ask Claude</strong> again.</p>
+  </div>
+
+  <hr>
+
+  <h2>Troubleshooting</h2>
+  <dl class="faq">
+    <dt>The sidebar opens but the content box is empty</dt>
+    <dd>The test page may load questions inside an iframe. Try scrolling to a question first, then tap Re-scan. If still empty, select and copy the question text manually and paste it into the content box.</dd>
+
+    <dt>"Invalid API key — cleared"</dt>
+    <dd>Your key was rejected. Tap <strong>Ask Claude</strong> again and re-enter a valid key from console.anthropic.com.</dd>
+
+    <dt>The sidebar disappears when I navigate to the next question</dt>
+    <dd>Tap the bookmark again to re-open it. The Re-scan button will pick up the new question on the current page.</dd>
+
+    <dt>I want to clear my saved API key</dt>
+    <dd>Tap the <strong>Clear Key</strong> button in the top-right of the sidebar header.</dd>
+
+    <dt>The answers seem wrong or incomplete</dt>
+    <dd>Add context in the "Your Question" box (e.g. "Focus on question 3") and tap Ask Claude again.</dd>
+  </dl>
+
+  <hr>
+
+  <h2>Privacy note</h2>
+  <div class="step">
+    <p>Your API key is stored only in <code>localStorage</code> for <code>unify.performancematters.com</code>. Page content is sent directly to Anthropic's API — no third-party servers are involved. Clearing your browser data will also clear the saved key.</p>
+  </div>
+
+  <script>
+    // Dynamically load the bookmarklet source and minify for the copy button
+    var bookmarkletCode = '';
+
+    async function loadBookmarklet() {
+      try {
+        // Try to load from same directory
+        const res = await fetch('./pm-bookmarklet.js');
+        const text = await res.text();
+        bookmarkletCode = text.trim();
+      } catch(e) {
+        // Fallback: inline a minimal version hint
+        bookmarkletCode = '(see pm-bookmarklet.js)';
+      }
+    }
+
+    function copyBookmarklet() {
+      if (!bookmarkletCode) {
+        document.getElementById('copy-status').textContent = 'Loading bookmarklet...';
+        loadBookmarklet().then(copyBookmarklet);
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(bookmarkletCode).then(() => {
+          document.getElementById('copy-status').textContent = 'Copied! Now follow step 3.';
+        });
+      } else {
+        // Safari fallback
+        const ta = document.createElement('textarea');
+        ta.value = bookmarkletCode;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        document.getElementById('copy-status').textContent = 'Copied! Now follow step 3.';
+      }
+    }
+
+    // Pre-load on page load
+    loadBookmarklet();
+  </script>
+</body>
+</html>
